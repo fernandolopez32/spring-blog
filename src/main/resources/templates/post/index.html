@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+
+
+
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:replace="/partials/partials.html :: header ">
+    <head th:replace="/partials/partials.html :: header">
+        <title>Index</title>
 </head>
     <body>
         <nav th:replace="/partials/partials.html :: navbar"></nav>
         <h1>this works</h1>
+
+        <ul th:each="post : ${allPost}" >
+            <li>
+                <h2 th:text="${post.title}" ></h2>
+                <p th:text="${post.body}" ></p>
+            </li>
+        </ul>
 
     <footer th:replace="/partials/partials.html :: footer" ></footer>
     </body>

@@ -14,9 +14,13 @@
     <li><a href="/roll-dice/5">5</a></li>
     <li><a href="/roll-dice/6">6</a></li>
 </ul>
-<!--VIEW-->
-
-
+<div th:if="${userGuess}" >
+    <p>You rolled a <span th:text="${userGuess}"></span></p>
+    <p>The random number was <span th:text="${randNumber}" ></span></p>
+<!--    type coercion courtesy of thymeleaf-->
+    <p th:if="${userGuess} == ${randNumber}">You guessed right!</p>
+    <p th:if="${userGuess} != ${randNumber}">You guessed wrong!</p>
+</div>
 
 
 </body>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="/partials/partials.html :: header" >
-
-    <title></title>
+    <title>Show</title>
 </head>
 <body>
     <nav th:replace="/partials/partials.html" ></nav>
     <h1>this shows!!!</h1>
 
+    <h2 th:text="${post.title}"></h2>
+    <p th:text="${post.body}"></p>
 
 
 
 
-    <footer th:replace="/partials/partials.html :: footer"></footer>
+
+<!--    <footer th:replace="/partials/partials.html :: footer"></footer>-->
 </body>
 </html>

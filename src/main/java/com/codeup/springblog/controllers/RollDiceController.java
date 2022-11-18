@@ -15,22 +15,29 @@ public class RollDiceController {
         return "roll-dice";
     }
 
-    @GetMapping("/{number}")
-    @ResponseBody
-    public String guess(@PathVariable int number, Model model) {
-        Dice dice = new Dice();
-//        instance of model
-
-//        generate random number with method from model
-        int randNum = dice.roll();
-
-        model.addAttribute("select", dice);
-
-
-        if (randNum == number) {
-            return "YOU WON!!!";
-        } else {
-            return "You lost, the number to guess was: " + randNum;
-        }
+    @GetMapping("/{guess}")
+    public String showRoll(@PathVariable String guess, Model model){
+        int randNumber = (int) (Math.random()*6)+1;
+        model.addAttribute("randNumber", randNumber);
+        model.addAttribute("userGuess", guess);
+        return "roll-dice";
     }
+//    @GetMapping("/{number}")
+//    @ResponseBody
+//    public String guess(@PathVariable int number, Model model) {
+//        Dice dice = new Dice();
+////        instance of model
+//
+////        generate random number with method from model
+//        int randNum = dice.roll();
+//
+//        model.addAttribute("select", dice);
+//
+//
+//        if (randNum == number) {
+//            return "YOU WON!!!";
+//        } else {
+//            return "You lost, the number to guess was: " + randNum;
+//        }
+//    }
 }
