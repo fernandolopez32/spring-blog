@@ -1,6 +1,6 @@
 package com.codeup.springblog.controllers;
 
-
+// CONTROLLER
 import com.codeup.springblog.models.Dice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +19,18 @@ public class RollDiceController {
     @ResponseBody
     public String guess(@PathVariable int number, Model model) {
         Dice dice = new Dice();
+//        instance of model
 
+//        generate random number with method from model
         int randNum = dice.roll();
 
         model.addAttribute("select", dice);
+
+
         if (randNum == number) {
-            return "you won";
+            return "YOU WON!!!";
         } else {
-            return "you lost";
+            return "You lost, the number to guess was: " + randNum;
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println();
-    }
-
-
 }
