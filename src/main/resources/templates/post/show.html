@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/partials/partials.html :: header" >
+
+    <title></title>
 </head>
 <body>
-<h1>this shows!!!</h1>
+    <nav th:replace="/partials/partials.html" ></nav>
+    <h1>this shows!!!</h1>
 
+
+
+
+
+    <footer th:replace="/partials/partials.html :: footer"></footer>
 </body>
 </html>
