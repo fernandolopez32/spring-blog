@@ -8,8 +8,7 @@
 </head>
     <body>
         <nav th:replace="/partials/partials.html :: navbar"></nav>
-        <h1>this works</h1>
-
+        <h1>This is your feed</h1>
         <ul th:each="post : ${allPost}" >
             <li>
                 <h2 th:text="${post.title}" ></h2>
@@ -17,6 +16,6 @@
             </li>
         </ul>
 
-    <footer th:replace="/partials/partials.html :: footer" ></footer>
+<!--    <footer th:replace="/partials/partials.html :: footer" ></footer>-->
     </body>
 </html>

@@ -4,16 +4,14 @@
     <title>Show</title>
 </head>
 <body>
-    <nav th:replace="/partials/partials.html" ></nav>
-    <h1>this shows!!!</h1>
+    <nav th:replace="/partials/partials.html :: navbar" ></nav>
+    <h1>This shows one post</h1>
 
-    <h2 th:text="${post.title}"></h2>
-    <p th:text="${post.body}"></p>
+    <div th:if="${post}">
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="${post.body}"></p>
+    </div>
+    <p th:unless="${post}">Could not find post</p>
 
-
-
-
-
-<!--    <footer th:replace="/partials/partials.html :: footer"></footer>-->
 </body>
 </html>
