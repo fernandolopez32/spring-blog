@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,13 @@ import java.util.List;
 
 @Controller
 public class PostController {
+
+    // making my Dao
+    private final PostRepository postDao;
+
+    public PostController (PostRepository postDao) {
+        this.postDao = postDao;
+    }
 
     @GetMapping("/index")
     public String allPost(Model model){
@@ -47,18 +55,23 @@ public class PostController {
 
 
     @GetMapping("/post/create")
-    public String createPost(){
+    public String createPostForm(){
         return "/post/create";
     }
 
 
     @PostMapping("/post/create")
-    public String create(){
+    public String createPost(){
         return "/post/create";
     }
 
 
-
+//    @PostMapping("/new")
+//    public String addCoffee(@RequestParam(name="roast") String roast, @RequestParam(name="origin") String origin, @RequestParam(name="brand") String brand){
+//        Coffee coffee = new Coffee(roast, origin, brand);
+//        coffeeDao.save(coffee);
+//        return "redirect:/coffee/all-coffees";
+//    }
 
 
 }
