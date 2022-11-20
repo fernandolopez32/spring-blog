@@ -19,7 +19,7 @@ public class PostController {
         this.postDao = postDao;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/post/index")
     public String allPost(Model model){
         Post post1 = new Post(1,"first","my first post");
         Post post2 = new Post(2,"first","my second post");
@@ -28,7 +28,7 @@ public class PostController {
         return "/post/index";
     }
 
-    @GetMapping("/show")
+    @GetMapping("/post/show")
     public String show(){
         return "/post/show";
     }
@@ -66,7 +66,7 @@ public class PostController {
 //        save object using the objectDao
         postDao.save(post);
 //        finally show the page of your liking
-        return "redirect:/post";
+        return "redirect:/post/index";
     }
 
 
