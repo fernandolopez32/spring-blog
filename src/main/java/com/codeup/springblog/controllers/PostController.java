@@ -4,10 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +58,15 @@ public class PostController {
 
 
     @PostMapping("/post/create")
-    public String createPost(){
-        return "/post/create";
+//    setting the params that are going to be inputted to the database
+    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+
+//        create a new post object with the params passed through the html
+        Post post = new Post(title,body);
+//        save object using the objectDao
+        postDao.save(post);
+//        finally show the page of your liking
+        return "redirect:/post";
     }
 
 
