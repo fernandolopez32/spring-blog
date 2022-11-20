@@ -45,10 +45,16 @@ public class PostController {
         return "/post/show";
     }
 
+
+    @GetMapping("/post/create")
+    public String createPost(){
+        return "/post/create";
+    }
+
+
     @PostMapping("/post/create")
-    @ResponseBody
     public String create(){
-        return "index page";
+        return "/post/create";
     }
 
 
