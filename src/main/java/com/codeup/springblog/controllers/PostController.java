@@ -26,13 +26,6 @@ public class PostController {
         return "/post/index";
     }
 
-//    @GetMapping("/all-coffees")
-//    public String allCoffees(Model model){
-//        List<Coffee> coffees = coffeeDao.findAll();
-//        model.addAttribute("coffees", coffees);
-//        return "all-coffees";
-//    }
-
     @GetMapping("/post/show")
     public String show(){
         return "/post/show";
