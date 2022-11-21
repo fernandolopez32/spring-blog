@@ -58,7 +58,6 @@ public class PostController {
     @PostMapping("/post/create")
 //    setting the params that are going to be inputted to the database
     public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-
 //        create a new post object with the params passed through the html
         Post post = new Post(title,body);
 //        save object using the objectDao
