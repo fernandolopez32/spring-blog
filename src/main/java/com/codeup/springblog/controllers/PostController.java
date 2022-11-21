@@ -21,12 +21,17 @@ public class PostController {
 
     @GetMapping("/post/index")
     public String allPost(Model model){
-        Post post1 = new Post(1,"first","my first post");
-        Post post2 = new Post(2,"first","my second post");
-        List<Post> allPost = new ArrayList<>(List.of(post1,post2));
+        List<Post> allPost = postDao.findAll();
         model.addAttribute("allPost",allPost);
         return "/post/index";
     }
+
+//    @GetMapping("/all-coffees")
+//    public String allCoffees(Model model){
+//        List<Coffee> coffees = coffeeDao.findAll();
+//        model.addAttribute("coffees", coffees);
+//        return "all-coffees";
+//    }
 
     @GetMapping("/post/show")
     public String show(){
