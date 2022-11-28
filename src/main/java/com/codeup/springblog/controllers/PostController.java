@@ -76,6 +76,13 @@ public class PostController {
         return "redirect:/post/index";
     }
 
+//    @PostMapping("/new")
+//public String addCoffee(@RequestParam(name="roast") String roast, @RequestParam(name="origin") String origin, @RequestParam(name="brand") String brand, @RequestParam(name="supplier") long id){
+//    Supplier supplier = supplierDao.findById(id);
+//    Coffee coffee = new Coffee(roast, origin, brand, supplier);
+//    coffeeDao.save(coffee);
+//    return "redirect:/coffee/all-coffees";
+//}
 
 //    @PostMapping("/new")
 //    public String addCoffee(@RequestParam(name="roast") String roast, @RequestParam(name="origin") String origin, @RequestParam(name="brand") String brand){
@@ -89,7 +96,7 @@ public class PostController {
         return "post/user-form";
     }
 
-    //     Suppliers for relationship walk through
+//         Suppliers for relationship walk through
 //    @GetMapping("/post/user-form")
 //    public String showSuppliersForm(Model model){
 //
@@ -101,14 +108,14 @@ public class PostController {
 //        return "/post/user-form";
 //    }
 
-    @PostMapping("/post/user-form")
+    @PostMapping("user-form")
     public String insertSupplier(@RequestParam(name = "email")String email,@RequestParam(name = "username")String username,@RequestParam(name = "password")String password) {
 
         User user = new User(email,username,password);
 
         userDao.save(user);
 
-        return "redirect:post/index";
+        return "redirect:post/user-form";
     }
 
 
