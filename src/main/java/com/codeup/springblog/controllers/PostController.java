@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,19 @@ import java.util.List;
 public class PostController {
 
     // making my Dao
-    private final PostRepository postDao;
 
-    public PostController (PostRepository postDao) {
+    private final UserRepository userDao;
+    private final PostRepository postDao;
+    public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
+        this.userDao = userDao;
     }
+
+//    private final PostRepository postDao;
+//
+//    public PostController (PostRepository postDao) {
+//        this.postDao = postDao;
+//    }
 
     @GetMapping("/post/index")
     public String allPost(Model model){
@@ -73,8 +83,33 @@ public class PostController {
 //        coffeeDao.save(coffee);
 //        return "redirect:/coffee/all-coffees";
 //    }
+//
+    @GetMapping("/post/user-form")
+    public String postForm(){
+        return "post/user-form";
+    }
 
+    //     Suppliers for relationship walk through
+//    @GetMapping("/post/user-form")
+//    public String showSuppliersForm(Model model){
+//
+//
+//        List<Supplier> suppliers = supplierDao.findAll();
+//
+//
+//        model.addAttribute("suppliers", suppliers);
+//        return "/post/user-form";
+//    }
 
+    @PostMapping("/post/user-form")
+    public String insertSupplier(@RequestParam(name = "email")String email,@RequestParam(name = "username")String username,@RequestParam(name = "password")String password) {
+
+        User user = new User(email,username,password);
+
+        userDao.save(user);
+
+        return "redirect:post/index";
+    }
 
 
 }
