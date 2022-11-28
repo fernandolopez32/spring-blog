@@ -13,3 +13,9 @@ body {
 /*    bottom: 0;*/
 /*    background-color: black;*/
 /*}*/
+
+.card{
+    background-color: purple;
+    color: whitesmoke;
+    padding: 2rem;
+}

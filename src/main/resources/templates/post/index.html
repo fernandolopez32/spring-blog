@@ -6,12 +6,17 @@
     <body>
         <nav th:replace="partials/partials.html :: navbar"></nav>
         <h1>This is your feed</h1>
-        <ul th:each="post : ${allPost}" >
-            <li>
-                <h2 th:text="${post.title}" ></h2>
-                <p th:text="${post.body}" ></p>
-            </li>
-        </ul>
+
+            <ul th:each="post : ${allPost}" >
+                <div class="card">
+                <li>
+                    <h2 th:text="${post.title}" ></h2>
+                    <p th:text="${post.body}" ></p>
+                    <p th:text="${post.user.getEmail()}"></p>
+                </li>
+                </div>
+            </ul>
+
     <footer th:replace="partials/partials.html :: footer"></footer>
     </body>
 </html>

@@ -23,11 +23,6 @@ public class PostController {
         this.userDao = userDao;
     }
 
-//    private final PostRepository postDao;
-//
-//    public PostController (PostRepository postDao) {
-//        this.postDao = postDao;
-//    }
 
     @GetMapping("/post/index")
     public String allPost(Model model){
@@ -68,7 +63,8 @@ public class PostController {
     @PostMapping("/post/create")
 //    setting the params that are going to be inputted to the database
     public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-        User user = userDao.findById(1);
+
+        User user = userDao.findById(2);
 //        create a new post object with the params passed through the html
         Post post = new Post(title,body,user);
 //        save object using the objectDao
@@ -82,17 +78,6 @@ public class PostController {
         return "post/user-form";
     }
 
-//         Suppliers for relationship walk through
-//    @GetMapping("/post/user-form")
-//    public String showSuppliersForm(Model model){
-//
-//
-//        List<Supplier> suppliers = supplierDao.findAll();
-//
-//
-//        model.addAttribute("suppliers", suppliers);
-//        return "/post/user-form";
-//    }
 
     @PostMapping("user-form")
     public String insertSupplier(@RequestParam(name = "email")String email,@RequestParam(name = "username")String username,@RequestParam(name = "password")String password) {
@@ -101,7 +86,7 @@ public class PostController {
 
         userDao.save(user);
 
-        return "redirect:post/user-form";
+        return "redirect:post/index";
     }
 
 
