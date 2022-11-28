@@ -17,6 +17,9 @@ public class Post  {
     @Column(nullable = false)
     private String body;
 
+    @ManyToOne
+    private User user;
+
 // === constructors
 
 
@@ -32,6 +35,12 @@ public class Post  {
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
     }
 
     // === setters and getters
@@ -57,5 +66,13 @@ public class Post  {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
