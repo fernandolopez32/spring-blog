@@ -68,29 +68,15 @@ public class PostController {
     @PostMapping("/post/create")
 //    setting the params that are going to be inputted to the database
     public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+        User user = userDao.findById(1);
 //        create a new post object with the params passed through the html
-        Post post = new Post(title,body);
+        Post post = new Post(title,body,user);
 //        save object using the objectDao
         postDao.save(post);
 //        finally show the page of your liking
         return "redirect:/post/index";
     }
 
-//    @PostMapping("/new")
-//public String addCoffee(@RequestParam(name="roast") String roast, @RequestParam(name="origin") String origin, @RequestParam(name="brand") String brand, @RequestParam(name="supplier") long id){
-//    Supplier supplier = supplierDao.findById(id);
-//    Coffee coffee = new Coffee(roast, origin, brand, supplier);
-//    coffeeDao.save(coffee);
-//    return "redirect:/coffee/all-coffees";
-//}
-
-//    @PostMapping("/new")
-//    public String addCoffee(@RequestParam(name="roast") String roast, @RequestParam(name="origin") String origin, @RequestParam(name="brand") String brand){
-//        Coffee coffee = new Coffee(roast, origin, brand);
-//        coffeeDao.save(coffee);
-//        return "redirect:/coffee/all-coffees";
-//    }
-//
     @GetMapping("/post/user-form")
     public String postForm(){
         return "post/user-form";

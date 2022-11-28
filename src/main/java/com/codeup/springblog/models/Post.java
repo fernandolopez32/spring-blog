@@ -43,6 +43,7 @@ public class Post  {
         this.user = user;
     }
 
+
     // === setters and getters
     public String getTitle() {
         return title;
