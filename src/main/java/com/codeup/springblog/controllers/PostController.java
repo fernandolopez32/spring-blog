@@ -55,18 +55,21 @@ public class PostController {
 
 
     @GetMapping("/post/create")
-    public String createPostForm(){
+    public String createPostForm(Model model){
+        model.addAttribute("post", new Post());
+        List<User> userList = userDao.findAll();
+        model.addAttribute(userList);
         return "/post/create";
     }
 
 
     @PostMapping("/post/create")
 //    setting the params that are going to be inputted to the database
-    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+    public String createPost(@ModelAttribute Post post){
 
-        User user = userDao.findById(2);
-//        create a new post object with the params passed through the html
-        Post post = new Post(title,body,user);
+//        User user = userDao.findById(2);
+////        create a new post object with the params passed through the html
+//        Post post = new Post(title,body,user);
 //        save object using the objectDao
         postDao.save(post);
 //        finally show the page of your liking
@@ -87,6 +90,20 @@ public class PostController {
         userDao.save(user);
 
         return "redirect:post/index";
+    }
+
+
+    @GetMapping("/post/{id}/edit")
+    public String editForm(Model model,@PathVariable long id){
+        Post post = postDao.findById(id);
+        model.addAttribute("post", post);
+        return "/post/edit";
+    }
+    @PostMapping("/post/{id}/edit")
+    public String editMethod(@ModelAttribute Post post){
+
+        postDao.save(post);
+        return "redirect:/post/index";
     }
 
 
