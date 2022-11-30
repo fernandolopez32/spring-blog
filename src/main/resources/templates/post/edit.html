@@ -3,7 +3,7 @@
 <head th:replace="partials/partials.html:: header ('Edit Your Post')"></head>
 <body>
 <h1>Edit page</h1>
-<form th:action="@{/post/{id}/edit(id=${post.id})}" method="post" th:object="${post}">
+<form th:action="@{/post/id/edit(id=${post.id})}" method="post" th:object="${post}">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" th:field="*{title}">
     <label for="body">Post Body:</label>

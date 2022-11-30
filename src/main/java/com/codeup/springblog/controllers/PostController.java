@@ -95,8 +95,8 @@ public class PostController {
 
     @GetMapping("/post/{id}/edit")
     public String editForm(Model model,@PathVariable long id){
-        Post post = postDao.findById(id);
-        model.addAttribute("post", post);
+
+        model.addAttribute("post", postDao.findById(id));
         return "/post/edit";
     }
     @PostMapping("/post/{id}/edit")
