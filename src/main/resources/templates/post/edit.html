@@ -5,9 +5,17 @@
 <h1>Edit page</h1>
 <form th:action="@{/post/{id}/edit(id=${post.id})}" method="post" th:object="${post}">
     <label for="title">Title:</label>
-    <input type="text" id="title" name="title" th:field="*{post.title}">
+    <input type="text" id="title" name="title" th:field="*{title}">
     <label for="body">Post Body:</label>
-    <input type="text" id="body" name="body" th:field="*{post.body}"><br>
+    <input type="text" id="body" name="body" th:field="*{body}"><br>
+    <select name="user" id="user" th:field="*{user.id}" >
+        <option
+                th:each="post : ${post}"
+                th:value="${post.user.id}"
+                th:text="${post.user.username}">
+        </option>
+    </select>
+    <button type="submit" value="submit">Submit</button>
 </form>
 
 

@@ -101,7 +101,6 @@ public class PostController {
     }
     @PostMapping("/post/{id}/edit")
     public String editMethod(@ModelAttribute Post post){
-
         postDao.save(post);
         return "redirect:/post/index";
     }
