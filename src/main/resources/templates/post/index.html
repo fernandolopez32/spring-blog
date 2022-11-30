@@ -4,6 +4,9 @@
     <head th:replace="partials/partials.html :: header (Index)">
     </head>
     <body>
+    <form th:action="@{/logout}" th:method="post">
+        <button>Logout</button>
+    </form>
         <nav th:replace="partials/partials.html :: navbar"></nav>
         <h1>This is your feed</h1>
 

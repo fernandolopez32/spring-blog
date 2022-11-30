@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false, length = 50,unique = true)
     private String username;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -39,6 +39,12 @@ public class User {
         this.password = password;
     }
 
+    public User(long id, String email, String username, String password) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 
     // setters and getters
 
