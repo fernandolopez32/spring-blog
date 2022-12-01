@@ -6,18 +6,11 @@
 <body>
 <fieldset>
     <legend>Add a Post!</legend>
-    <form action="/post/create" method="post" th:object="${post}">
+    <form th:action="@{/post/create}" method="post" th:object="${post}">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}">
         <label for="body">Post Body:</label>
         <input type="text" id="body" name="body" th:field="*{body}"><br>
-        <select name="user" id="user" th:field="*{user.id}" >
-            <option
-                    th:each="user : ${userList}"
-                    th:value="${user.id}"
-                    th:text="${user.username}">
-            </option>
-        </select>
         <input type="submit" value="submit">
     </form>
 </fieldset>

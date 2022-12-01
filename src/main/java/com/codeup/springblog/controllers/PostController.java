@@ -4,6 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,22 +58,18 @@ public class PostController {
     @GetMapping("/post/create")
     public String createPostForm(Model model){
         model.addAttribute("post", new Post());
-        List<User> userList = userDao.findAll();
-        model.addAttribute(userList);
         return "/post/create";
     }
 
 
     @PostMapping("/post/create")
-//    setting the params that are going to be inputted to the database
     public String createPost(@ModelAttribute Post post){
 
-//        User user = userDao.findById(2);
-////        create a new post object with the params passed through the html
-//        Post post = new Post(title,body,user);
-//        save object using the objectDao
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = loggedInUser.getId();
+        loggedInUser = userDao.findById(userId);
+        post.setUser(loggedInUser);
         postDao.save(post);
-//        finally show the page of your liking
         return "redirect:/post/index";
     }
 
@@ -84,11 +81,8 @@ public class PostController {
 
     @PostMapping("user-form")
     public String insertSupplier(@RequestParam(name = "email")String email,@RequestParam(name = "username")String username,@RequestParam(name = "password")String password) {
-
         User user = new User(email,username,password);
-
         userDao.save(user);
-
         return "redirect:post/index";
     }
 
