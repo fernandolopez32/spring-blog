@@ -4,6 +4,7 @@
 <head th:replace="partials/partials.html :: header (Create-a-Post)">
 </head>
 <body>
+<nav th:replace="partials/partials.html :: navbar"></nav>
 <fieldset>
     <legend>Add a Post!</legend>
     <form th:action="@{/post/create}" method="post" th:object="${post}">
