@@ -64,9 +64,11 @@ public class PostController {
 
     @PostMapping("/post/create")
     public String createPost(@ModelAttribute Post post){
-
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = loggedInUser.getId();
+        if (userId == 0){
+            return "redirect:/login";
+        }
         loggedInUser = userDao.findById(userId);
         post.setUser(loggedInUser);
         postDao.save(post);
@@ -90,11 +92,28 @@ public class PostController {
     @GetMapping("/post/{id}/edit")
     public String editForm(Model model,@PathVariable long id){
 
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = loggedInUser.getId();
+        if(userId == 0){
+            return "redirect:/login";
+        }
+        Post post = postDao.findById(id);
+//        post.getUser().getId() != loggedInUser)
+        if(post.getUser().getId() != userId){
+            return "redirect:/index";
+        }
         model.addAttribute("post", postDao.findById(id));
+
         return "/post/edit";
     }
     @PostMapping("/post/{id}/edit")
     public String editMethod(@ModelAttribute Post post){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = loggedInUser.getId();
+
+
+
+
         postDao.save(post);
         return "redirect:/post/index";
     }
