@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/post")
 public class PostController {
 
     // making my Dao
@@ -25,14 +26,14 @@ public class PostController {
     }
 
 
-    @GetMapping("/post/index")
+    @GetMapping("/index")
     public String allPost(Model model){
         List<Post> allPost = postDao.findAll();
         model.addAttribute("allPost",allPost);
         return "/post/index";
     }
 
-    @GetMapping("/post/show")
+    @GetMapping("/show")
     public String show(){
         return "/post/show";
     }
@@ -55,14 +56,14 @@ public class PostController {
     }
 
 
-    @GetMapping("/post/create")
+    @GetMapping("/create")
     public String createPostForm(Model model){
         model.addAttribute("post", new Post());
         return "/post/create";
     }
 
 
-    @PostMapping("/post/create")
+    @PostMapping("/create")
     public String createPost(@ModelAttribute Post post){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = loggedInUser.getId();
@@ -75,7 +76,7 @@ public class PostController {
         return "redirect:/post/index";
     }
 
-    @GetMapping("/post/user-form")
+    @GetMapping("/user-form")
     public String postForm(){
         return "post/user-form";
     }
@@ -87,33 +88,29 @@ public class PostController {
         userDao.save(user);
         return "redirect:post/index";
     }
-
-
-    @GetMapping("/post/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editForm(Model model,@PathVariable long id){
-
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long userId = loggedInUser.getId();
-        if(userId == 0){
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if(currentUserId == 0){
             return "redirect:/login";
         }
         Post post = postDao.findById(id);
-//        post.getUser().getId() != loggedInUser)
-        if(post.getUser().getId() != userId){
-            return "redirect:/index";
+        if(post.getUser().getId() != currentUserId){
+            return "redirect:/post/show";
         }
-        model.addAttribute("post", postDao.findById(id));
-
+        model.addAttribute("post", post);
         return "/post/edit";
     }
-    @PostMapping("/post/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String editMethod(@ModelAttribute Post post){
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long userId = loggedInUser.getId();
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 
+        if(currentUserId == 0){
+            return "redirect:/login";
+        }
+        User user = userDao.findById(currentUserId);
 
-
-
+        post.setUser(user);
         postDao.save(post);
         return "redirect:/post/index";
     }

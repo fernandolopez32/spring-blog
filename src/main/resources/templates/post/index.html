@@ -8,23 +8,23 @@
         <h1>This is your feed</h1>
 
             <ul th:each="post : ${allPost}" >
-<!--                <div class="card">-->
+                <div class="card">
                     <li>
                         <h2 th:text="${post.title}" ></h2>
                         <p th:text="${post.body}" ></p>
                         <p th:text="${post.user.email}"></p>
-                        <p th:if="${post.user.id} == ${#authentication.principal.id}">
-                            <button th:data-id="${post.id}" class="edit-button">Edit</button>
-                        </p>
+                        <span sec:authorize = "isAuthenticated()">
+                            <p th:if="${post.user.id == #authentication.principal.id}">
+                                <button th:data-id="${post.id}" class="editButton">Edit</button>
+                            </p>
+                        </span>
                     </li>
-<!--                </div>-->
+                </div>
             </ul>
 
 
-
     <footer th:replace="partials/partials.html :: footer"></footer>
-
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="/static/js/edit.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="/static/js/edit.js"></script>
     </body>
 </html>
